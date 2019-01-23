@@ -1,25 +1,18 @@
 # clean_architecture_omdb
 Using OMDB APIs CleanArcitectureApp
-Documentation
+# Documentation
 
 Project Architecture Diagram
 Architecture of the Entire project is a best effort attempt to be in line with the clean architecture paradigm.
 Below listed diagram actually maps the clean architecture to OMDB Application modules and how the 
-dependency is allowed to flow.
+dependency is allowed to flow. 
 
-Data Flow 
-￼
-
-Project Modules 
-￼
-
-How To Scale For API’s or Data Sources 
+# How To Scale For API’s or Data Sources 
 
 - Use the search API http://www.omdbapi.com/?s=hello 
-- Display it in a listview with Title, Year and Poster
-- Focus on testing, writing maintainable code. (Code documentation, unit testing etc)
 
-domain module 
+
+# domain module 
 Domain module provides all the required abstraction , business  definition and logic for the application. 
 Following abstractions are provided in domain module  which will be used  to achieve separation between data and view.
 
@@ -29,7 +22,7 @@ Following abstractions are provided in domain module  which will be used  to ach
 * Mapper interface . Defines abstraction for translating between domain and any Model definition being  used in the  upper layers 
 * ‘Either’ artifact  from Fernando Cejas Open Source Project
  
-data module 
+# data module 
 data modules provide most of the concrete implementation for the domain/business level abstractions and also provides an another 
 abstraction datastore to implement remote and cache repos.
 
@@ -48,10 +41,10 @@ app module has the android FW , api’s , ViewModel , data binding, dagger depen
 * ViewModel in this application also be used for data binding 
 * AppComponent  provides required dependency injection
 
-core module
+# core module
 * Provide a  dependency injection from services like gson, retrofit
 
-References 
+# References 
 https://github.com/googlesamples/android-architecture 
 https://medium.com/stepstone-tech/clean-architecture-with-reactive-use-cases-c943d7a8f69c
 https://medium.com/@yoelglus/android-and-clean-architecture-the-use-case-interface-8716512f29a1  < This is  translated to kotlin with co-routines >
