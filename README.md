@@ -11,7 +11,6 @@ dependency is allowed to flow.
 
 - Use the search API http://www.omdbapi.com/?s=hello 
 
-
 # domain module 
 Domain module provides all the required abstraction , business  definition and logic for the application. 
 Following abstractions are provided in domain module  which will be used  to achieve separation between data and view.
