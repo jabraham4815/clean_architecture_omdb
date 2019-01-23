@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.sdkCompile
+
+    defaultConfig {
+        minSdkVersion Versions.sdkMin
+        targetSdkVersion Versions.sdkTarget
+        multiDexEnabled true
+
+        consumerProguardFiles 'proguard-rules.pro'
+
+        resConfigs "en"
+    }
+
+    compileOptions {
+        sourceCompatibility Versions.sourceCompatibility
+        targetCompatibility Versions.targetCompatibility
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+    implementation project(':core')
+    implementation Deps.androidSupportAppcompat
+    implementation Deps.androidSupportAnnotations
+
+    implementation Deps.kotlinStdLib
+    implementation Deps.kotlinCoroutines
+
+    implementation Deps.okhttpLogginginterceptor
+    implementation Deps.okhttp
+
+    implementation Deps.retrofit
+    implementation Deps.retrofitScalar
+    
+    implementation Deps.gsonConverter
+
+    kapt Deps.daggerCompiler
+    kapt Deps.daggerAndroidProcessor
+
+    implementation Deps.dagger
+    implementation Deps.daggerAndroid
+    implementation Deps.daggerAndroidSupport
+
+    testImplementation TestDeps.junit
+    testImplementation TestDeps.mockito
+    // Provides JUnit 4 rules
+    androidTestImplementation(TestDeps.androidTestRules) {
+        exclude module: 'support-annotations'
+    }
+    implementation project(path: ':core')
+}

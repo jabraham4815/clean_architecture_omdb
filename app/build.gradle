@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "launcher.farrago.com.omdb"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation Deps.androidSupportAppcompat
+    implementation Deps.androidSupportDesign
+    implementation Deps.androidSupportAnnotations
+    implementation Deps.androidSupportConstraintlayout
+
+    //IMG
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    implementation Deps.kotlinStdLib
+    implementation Deps.kotlinCoroutines
+    implementation Deps.kotlinCoroutinesAndroid
+    implementation Deps.koinAndroid
+
+    implementation Deps.gson
+
+    kapt Deps.daggerCompiler
+    kapt Deps.daggerAndroidProcessor
+
+    implementation Deps.dagger
+    implementation Deps.daggerAndroid
+    implementation Deps.daggerAndroidSupport
+
+    implementation Deps.okhttpLogginginterceptor
+    implementation Deps.okhttp
+
+    implementation Deps.retrofit
+    implementation Deps.retrofitScalar
+
+    implementation Deps.gsonConverter
+
+    implementation Deps.piccasoImage
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.8.9"
+
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    implementation project(':data')
+    implementation project(':domain')
+    implementation project(path: ':core')
+}

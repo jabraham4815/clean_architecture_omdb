@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.sdkCompile
+
+    defaultConfig {
+        minSdkVersion Versions.sdkMin
+        targetSdkVersion Versions.sdkTarget
+        multiDexEnabled true
+
+        consumerProguardFiles 'proguard-rules.pro'
+
+        resConfigs "en"
+    }
+
+    compileOptions {
+        sourceCompatibility Versions.sourceCompatibility
+        targetCompatibility Versions.targetCompatibility
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Deps.kotlinStdLib
+    implementation Deps.kotlinCoroutines
+    implementation Deps.kotlinCoroutinesAndroid
+    testImplementation TestDeps.junit
+    testImplementation TestDeps.mockito
+    testImplementation TestDeps.powermock
+}
