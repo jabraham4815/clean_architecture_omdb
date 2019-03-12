@@ -2,6 +2,7 @@ package launcher.farrago.com.farragov2
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil

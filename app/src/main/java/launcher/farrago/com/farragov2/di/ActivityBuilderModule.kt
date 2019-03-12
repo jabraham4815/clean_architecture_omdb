@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 abstract class ActivityBuilderModule {
-    @ContributesAndroidInjector(modules = [DataModuleScoped::class])
+    @ContributesAndroidInjector(modules = [DataModuleScoped::class,ViewModelModule::class])
     @Singleton
     abstract fun bindMainActivity (): MainActivity
 

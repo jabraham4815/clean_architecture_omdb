@@ -11,12 +11,16 @@ import launcher.farrago.com.farragov2.di.AppComponent
 import retrofit2.Retrofit
 import java.io.InvalidObjectException
 import javax.inject.Inject
+import launcher.farrago.com.farragov2.di.ViewModelFactory
+
+
 
 class MainActivity : AppCompatActivity() {
     @Inject lateinit var appcomponet: AppComponent
     @Inject lateinit var gson: Gson
     @Inject lateinit var retrofit: Retrofit
     @Inject lateinit var useCase: GetContentsUseCase<Map<String, String>>
+    @Inject lateinit var viewModelFactory: ViewModelFactory
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -41,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (viewModelFactory == null) {
+            throw InvalidObjectException("viewModelFactory null exec")
+        }
         if (appcomponet == null) {
             throw InvalidObjectException("appcomponet null exec")
         }
