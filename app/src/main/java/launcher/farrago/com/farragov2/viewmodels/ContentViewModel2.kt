@@ -7,9 +7,8 @@ import launcher.farrago.com.domain.models.Content
 import launcher.farrago.com.domain.usecase.Either
 import launcher.farrago.com.farragov2.di.AppComponent
 import java.io.InvalidObjectException
-import javax.inject.Inject
 
-class ContentViewModel2 @Inject constructor ( var getContentsUseCase: GetContentsUseCase<Map<String, String>>): BaseViewModel() {
+class MyViewModel : BaseViewModel() {
     private var _contents: MutableLiveData<List<Content?>>? = null
     val contents: MutableLiveData<List<Content?>>
         get() {
@@ -18,6 +17,11 @@ class ContentViewModel2 @Inject constructor ( var getContentsUseCase: GetContent
             }
             return _contents ?: throw AssertionError("Set to null by another thread")
         }
+
+    /*
+      ToDo di for viewmodels
+     */
+    lateinit var getContentsUseCase: GetContentsUseCase<Map<String, String>>
 
     fun setupViewModelForInjection(appComponent: AppComponent) {
         //appComponent.inject(this)

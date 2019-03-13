@@ -2,7 +2,6 @@ package launcher.farrago.com.farragov2
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -14,7 +13,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
-import launcher.farrago.com.data.usecases.GetContentsUseCase
 import launcher.farrago.com.farragov2.databinding.ContentsModuleViewBinding
 import launcher.farrago.com.farragov2.di.AppComponent
 import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
@@ -48,26 +46,21 @@ class ContentsView : ConstraintLayout {
         title = binding?.wordsModuleTitle
 
         setUpRecycler()
-
-        if (context is MainActivity) {
-            val activity: MainActivity = context as MainActivity
-            setupViewModel(activity.appcomponet, activity.useCase)
-            executeContentsSearch(getSearchParameters())
-        }
     }
 
-    private fun setupViewModel(
+    fun setupViewModel(
         appComponent: AppComponent,
-        usecaseOMDB: GetContentsUseCase<Map<String, String>>
+        viewModel: ContentViewModel?
     ) {
-        val viewModel = ContentViewModel()
-        viewModel.setupViewModelForInjection(appComponent)
-        viewModel.setupViewModel(usecaseOMDB)
-        binding?.viewModel = viewModel
 
+        viewModel?.setupViewModelForInjection(appComponent)
+        binding?.viewModel = viewModel
         binding?.viewModel?.contents?.observe(context as FragmentActivity, Observer { items ->
             items?.let { contentsAdapter.setItems(it) }
         })
+
+        val searchparams = getSearchParameters()
+        searchparams.let { executeContentsSearch(it) }
     }
 
     private fun getSearchParameters(): HashMap<String, String> {
@@ -90,7 +83,7 @@ class ContentsView : ConstraintLayout {
         contentsAdapter = ContentListAdapter(onClick = {
             val intent = Intent(this.context, ContentDetailsActivity::class.java)
             it.let { poster ->
-                intent?.putExtra("poster", poster)
+                intent.putExtra("poster", poster)
             }
             startActivity(this.context, intent, null)
 

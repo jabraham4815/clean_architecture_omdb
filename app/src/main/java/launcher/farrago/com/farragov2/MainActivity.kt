@@ -1,10 +1,12 @@
 package launcher.farrago.com.farragov2
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import com.google.gson.Gson
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_main.contents_view
 import kotlinx.android.synthetic.main.activity_main.navigation
 import launcher.farrago.com.data.usecases.GetContentsUseCase
 import launcher.farrago.com.farragov2.di.AppComponent
@@ -12,8 +14,7 @@ import retrofit2.Retrofit
 import java.io.InvalidObjectException
 import javax.inject.Inject
 import launcher.farrago.com.farragov2.di.ViewModelFactory
-
-
+import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
 
 class MainActivity : AppCompatActivity() {
     @Inject lateinit var appcomponet: AppComponent
@@ -27,12 +28,6 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_home -> {
                 return@OnNavigationItemSelectedListener true
             }
-//            R.id.navigation_dashboard -> {
-//                return@OnNavigationItemSelectedListener true
-//            }
-//            R.id.navigation_notifications -> {
-//                return@OnNavigationItemSelectedListener true
-//            }
         }
         false
     }
@@ -45,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         if (viewModelFactory == null) {
             throw InvalidObjectException("viewModelFactory null exec")
         }
@@ -59,7 +55,8 @@ class MainActivity : AppCompatActivity() {
             throw InvalidObjectException("useCaseOMDB null exec")
         }
 
+        val contentViewModel = ViewModelProviders.of(this, viewModelFactory).get(ContentViewModel::class.java)
+        contents_view?.setupViewModel(appcomponet,contentViewModel)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
     }
 }

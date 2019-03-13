@@ -31,6 +31,9 @@ dependencies {
     implementation Deps.androidSupportAnnotations
     implementation Deps.androidSupportConstraintlayout
 
+    implementation Deps.androidLifeCycleExtension
+    implementation Deps.androidLifeCycleViewModel
+
     //IMG
     implementation 'com.squareup.picasso:picasso:2.5.2'
 

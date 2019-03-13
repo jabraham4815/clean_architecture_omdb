@@ -7,7 +7,6 @@ import dagger.android.AndroidInjectionModule
 import launcher.farrago.com.core.di.CoreComponent
 import launcher.farrago.com.farragov2.MainApplication
 import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
-import launcher.farrago.com.farragov2.viewmodels.ContentViewModel2
 
 /*
  @Component: Component is a graph. We build a component. Component will provide injected instances by using modules.
@@ -23,7 +22,6 @@ import launcher.farrago.com.farragov2.viewmodels.ContentViewModel2
 )
 @AppScope
 interface AppComponent {
-
     /*
     @Component.Builder: We might want to bind some INSTANCE to Component.
     In this case we can create an interface with @Component.Builder annotation
@@ -46,5 +44,4 @@ interface AppComponent {
 
     fun inject(app: MainApplication)
     fun inject(contentViewModel: ContentViewModel)
-    //fun inject(contentViewModel: ContentViewModel2)
 }

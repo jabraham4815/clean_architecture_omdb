@@ -16,6 +16,9 @@ object Deps {
     val androidSupportDesign = "com.android.support:design:${Versions.androidSupport}"
     val androidSupportPercent = "com.android.support:percent:${Versions.androidSupport}"
 
+    val androidLifeCycleExtension = "android.arch.lifecycle:extensions:${Versions.archLifecycle}"
+    val androidLifeCycleViewModel = "android.arch.lifecycle:viewmodel:${Versions.archLifecycle}"
+
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
     val retrofitScalar = "com.squareup.retrofit2:converter-scalars:${Versions.retrofitScalarVersion}"
     val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"

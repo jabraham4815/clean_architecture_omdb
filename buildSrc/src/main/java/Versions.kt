@@ -28,6 +28,9 @@ object Versions {
     const val materialDialogs ="0.9.2.3"
 
     const val androidSupport = "28.0.0"
+
+    const val archLifecycle = "1.1.1"
+
     const val playServices = "15.0.1"
     const val firebaseCore = "15.0.2"
     const val firebaseMessaging = "15.0.2"
