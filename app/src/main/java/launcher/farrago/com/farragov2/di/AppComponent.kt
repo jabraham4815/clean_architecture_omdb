@@ -10,7 +10,7 @@ import launcher.farrago.com.farragov2.MainApplication
 import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
 
 /*
- @Component: Component is a graph. We build a component. Component will provide injected instances by using modules.
+ @Component: Component is a graph. We build a component. Component will built it's graph and provide injected instances by using modules.
  */
 
 /*
@@ -44,7 +44,7 @@ interface AppComponent {
     }
 
     /*
-      Following are the classes required injection or asking access to the graph built by this component.
+      Following are the classes requesting injection or asking access to the graph built by this component.
      */
     fun inject(app: MainApplication)
     fun inject(contentView: ContentsView)
