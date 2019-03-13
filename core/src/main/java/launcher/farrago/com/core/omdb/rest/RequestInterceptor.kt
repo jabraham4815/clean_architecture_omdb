@@ -1,4 +1,4 @@
-package launcher.farrago.com.data.api.omdb.rest
+package launcher.farrago.com.core.omdb.rest
 
 import android.support.annotation.NonNull
 import launcher.farrago.com.domain.Constants
@@ -16,10 +16,6 @@ class RequestInterceptor : Interceptor {
             .addQueryParameter("apikey", Constants.API_OMDB_KEY)
             .build()
 
-        /*
-          [JA] Blocked on encoding issues and not able to remove = encoding.
-          For now this works or consider brute force by using Asynkk and doing direct Json deserialization
-         */
         val url2 = url.toString().replace("%3D", "=")
 
         val request = originalRequest.newBuilder().url(url2).build()

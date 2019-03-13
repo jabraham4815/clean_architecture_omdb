@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-class DataModuleScoped {
+class DataModule {
 
     @Provides
     @Singleton
@@ -23,7 +23,7 @@ class DataModuleScoped {
     @Provides
     @Singleton
     fun provideCacheOMDBDataStore(): CachedContentDataStore {
-        Log.d("DaggerOMDB", "Enter provideCacheOMDBDataStore")
+        Log.d("DaggerOMDB", "providing CacheOMDBDataStore")
         return CachedContentDataStore()
     }
 
@@ -31,7 +31,7 @@ class DataModuleScoped {
     @Singleton
     @Inject
     fun provideOMDBDataRepository(dataStore: OMDBContentDataStore): OMDBContentRepository {
-        Log.d("DaggerOMDB", "Enter provideOMDBDataRepository")
+        Log.d("DaggerOMDB", "providing OMDBDataRepository")
         return OMDBContentRepository(dataStore)
     }
 
@@ -39,7 +39,7 @@ class DataModuleScoped {
     @Singleton
     @Inject
     fun provideOMDBSearchUseCase(repository: OMDBContentRepository): GetContentsUseCase<Map<String, String>> {
-        Log.d("DaggerOMDB", "Enter provideOMDBSearchUseCase")
+        Log.d("DaggerOMDB", "providing OMDBSearchUseCase")
         return GetContentsUseCase<Map<String, String>>(repository)
     }
 }

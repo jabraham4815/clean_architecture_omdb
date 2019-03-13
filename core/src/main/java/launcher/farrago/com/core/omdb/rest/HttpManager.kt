@@ -1,8 +1,7 @@
-package launcher.farrago.com.core.Rest
+package launcher.farrago.com.core.omdb.rest
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import launcher.farrago.com.core.rest.HeaderInterceptor
 import launcher.farrago.com.domain.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

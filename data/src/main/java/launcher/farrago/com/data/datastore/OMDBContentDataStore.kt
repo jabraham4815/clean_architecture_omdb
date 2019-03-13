@@ -21,10 +21,8 @@ class OMDBContentDataStore : ContentDataStore {
              */
             val OMDBContents: MutableList<OMDBItem?> = mutableListOf()
             val contents: MutableList<Content?> = mutableListOf()
-
             val searchDataOMDB = HashMap<String, String>()
             searchDataOMDB.put("s=", "hello")
-            //val loadContentsCall = OMDBRest.INSTANCE.getCaller()?.loadContent2("hello")
             val loadContentsCall = OMDBRest.INSTANCE.getCaller()?.loadContent(inputItems)
             loadContentsCall?.enqueue(object : Callback<OMDBItems> {
                 override fun onResponse(

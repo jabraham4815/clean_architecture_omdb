@@ -1,4 +1,4 @@
-package launcher.farrago.com.data.api.omdb.rest
+package launcher.farrago.com.core.omdb.rest
 
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -18,7 +18,10 @@ class HeaderInterceptor : Interceptor {
         val request: Request? = chain?.request()
         val requestBuilder: Request.Builder? = request?.newBuilder()
         requestBuilder?.let {
-            it.addHeader(CONTENT_TYPE, APPLICATION_JSON)
+            it.addHeader(
+                CONTENT_TYPE,
+                APPLICATION_JSON
+            )
             return chain.proceed(it.build())
         }
         return null
