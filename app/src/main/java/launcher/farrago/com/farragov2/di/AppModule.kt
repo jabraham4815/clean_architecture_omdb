@@ -16,14 +16,14 @@ class AppModule() {
     @Provides
     @AppScope
     fun provideContext(app: Application): Context {
-        Log.d("DaggerOMDB", "Enter provideContext")
+        Log.d("OMDB", "Providing provideContext")
         return app
     }
 
     @Provides
     @AppScope
     fun provideApplication(app: MainApplication): MainApplication {
-        Log.d("DaggerOMDB", "Enter provideApplication")
+        Log.d("OMDB", "Providing provideApplication")
         return app
     }
 }

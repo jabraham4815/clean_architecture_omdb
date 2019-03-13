@@ -5,10 +5,11 @@ import launcher.farrago.com.data.usecases.GetContentsUseCase
 import launcher.farrago.com.domain.exceptions.Failure
 import launcher.farrago.com.domain.models.Content
 import launcher.farrago.com.domain.usecase.Either
-import launcher.farrago.com.farragov2.di.AppComponent
-import java.io.InvalidObjectException
 import javax.inject.Inject
 
+/*
+  Ideally all dependencies for view model should have been injected via Ctr
+ */
 class ContentViewModel @Inject constructor ( var getContentsUseCase: GetContentsUseCase<Map<String, String>>): BaseViewModel() {
     private var _contents: MutableLiveData<List<Content?>>? = null
     val contents: MutableLiveData<List<Content?>>
@@ -18,10 +19,6 @@ class ContentViewModel @Inject constructor ( var getContentsUseCase: GetContents
             }
             return _contents ?: throw AssertionError("Set to null by another thread")
         }
-
-    fun setupViewModelForInjection(appComponent: AppComponent) {
-        appComponent.inject(this)
-    }
 
     fun getContents(inputParams: Map<String, String>) {
         getContentsUseCase(inputParams, onResult = { it: Either<Failure, List<Content?>> ->

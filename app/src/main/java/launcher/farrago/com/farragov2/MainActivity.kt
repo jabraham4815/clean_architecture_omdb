@@ -10,11 +10,11 @@ import kotlinx.android.synthetic.main.activity_main.contents_view
 import kotlinx.android.synthetic.main.activity_main.navigation
 import launcher.farrago.com.data.usecases.GetContentsUseCase
 import launcher.farrago.com.farragov2.di.AppComponent
+import launcher.farrago.com.farragov2.di.ViewModelFactory
+import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
 import retrofit2.Retrofit
 import java.io.InvalidObjectException
 import javax.inject.Inject
-import launcher.farrago.com.farragov2.di.ViewModelFactory
-import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
 
 class MainActivity : AppCompatActivity() {
     @Inject lateinit var appcomponet: AppComponent
@@ -41,6 +41,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        verifyInjection()
+
+        //View Model is created using View Model Factory which is injected using MainActivity SubComponent.Refer ActivityBuilderModule.java adding for MainActivity
+        val contentViewModel = ViewModelProviders.of(this, viewModelFactory).get(ContentViewModel::class.java)
+        contents_view?.setupViewModel(contentViewModel)
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    }
+
+    private fun verifyInjection() {
         if (viewModelFactory == null) {
             throw InvalidObjectException("viewModelFactory null exec")
         }
@@ -54,9 +63,5 @@ class MainActivity : AppCompatActivity() {
         if (useCase == null) {
             throw InvalidObjectException("useCaseOMDB null exec")
         }
-
-        val contentViewModel = ViewModelProviders.of(this, viewModelFactory).get(ContentViewModel::class.java)
-        contents_view?.setupViewModel(appcomponet,contentViewModel)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 }

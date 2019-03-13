@@ -1,6 +1,7 @@
 package launcher.farrago.com.farragov2.di;
 
 import android.arch.lifecycle.ViewModel;
+import android.util.Log;
 
 import java.util.Map;
 
@@ -24,8 +25,9 @@ public class ViewModelModule {
       and @ViewModelKey annotation specifies under which key it will reside.
      */
     @Inject
-    ViewModel contentCViewModel2(
+    ViewModel provideContentViewModel(
            GetContentsUseCase<Map<String, String>> usecase) {
+        Log.d("OMDB", "Providing ContentViewModel");
         return new ContentViewModel(usecase);
     }
 

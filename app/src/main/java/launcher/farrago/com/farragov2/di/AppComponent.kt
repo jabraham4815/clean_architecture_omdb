@@ -5,6 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import launcher.farrago.com.core.di.CoreComponent
+import launcher.farrago.com.farragov2.ContentsView
 import launcher.farrago.com.farragov2.MainApplication
 import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
 
@@ -42,6 +43,9 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
+    /*
+      Following are the classes required injection or asking access to the graph built by this component.
+     */
     fun inject(app: MainApplication)
-    fun inject(contentViewModel: ContentViewModel)
+    fun inject(contentView: ContentsView)
 }

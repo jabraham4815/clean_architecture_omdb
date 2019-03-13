@@ -1,6 +1,5 @@
 package launcher.farrago.com.farragov2
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
@@ -13,9 +12,10 @@ import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
+import com.google.gson.Gson
 import launcher.farrago.com.farragov2.databinding.ContentsModuleViewBinding
-import launcher.farrago.com.farragov2.di.AppComponent
 import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
+import javax.inject.Inject
 
 //https://developer.android.com/topic/libraries/data-binding/architecture#livedata
 /**
@@ -27,6 +27,14 @@ class ContentsView : ConstraintLayout {
     private var binding: ContentsModuleViewBinding? = null
 
     private lateinit var contentsAdapter: ContentListAdapter
+
+    //Added here to demo injection
+    @Inject lateinit var gson: Gson
+    /*
+       Note we cannot inject anything provided by the subComponents attached to this AppComponent . i.e you won't be able to inject anything
+       provided by Modules DataModule or ViewModelsProvider here
+       However for subComponents like the one mentioned in ActivityBuilderModule has complete access to AppComponent.
+     */
 
     constructor(context: Context) : this(context, null)
     constructor(
@@ -44,23 +52,28 @@ class ContentsView : ConstraintLayout {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = DataBindingUtil.inflate(inflater, R.layout.contents_module_view, this, true)
         title = binding?.wordsModuleTitle
+        title?.text = "OMDB CONTENTS LIST"
+
+        //setup for injection
+        val appComponent = (context.applicationContext as MainApplication).provideAppComponent()
+        appComponent.inject(this)
 
         setUpRecycler()
     }
 
     fun setupViewModel(
-        appComponent: AppComponent,
         viewModel: ContentViewModel?
     ) {
+        val searchparams = getSearchParameters()
 
-        viewModel?.setupViewModelForInjection(appComponent)
         binding?.viewModel = viewModel
         binding?.viewModel?.contents?.observe(context as FragmentActivity, Observer { items ->
             items?.let { contentsAdapter.setItems(it) }
         })
 
-        val searchparams = getSearchParameters()
-        searchparams.let { executeContentsSearch(it) }
+        searchparams.let {
+            binding?.viewModel?.getContents(it)
+        }
     }
 
     private fun getSearchParameters(): HashMap<String, String> {
@@ -68,15 +81,6 @@ class ContentsView : ConstraintLayout {
         val title = "hello"
         searchDataOMDB["s="] = title
         return searchDataOMDB
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun executeContentsSearch(searchData: HashMap<String, String>) {
-        title?.text = "OMDB CONTENTS LIST"
-        /*
-          Actual task will be executed by ViewModel
-         */
-        binding?.viewModel?.getContents(searchData)
     }
 
     private fun setUpRecycler() {
