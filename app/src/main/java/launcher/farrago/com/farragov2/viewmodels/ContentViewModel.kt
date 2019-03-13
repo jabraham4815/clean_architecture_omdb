@@ -23,13 +23,6 @@ class ContentViewModel @Inject constructor ( var getContentsUseCase: GetContents
         appComponent.inject(this)
     }
 
-    fun setupViewModel(usecase: GetContentsUseCase<Map<String, String>>) {
-        getContentsUseCase = usecase
-        if (getContentsUseCase == null) {
-            throw InvalidObjectException("getContentsUseCase null exec") as Throwable
-        }
-    }
-
     fun getContents(inputParams: Map<String, String>) {
         getContentsUseCase(inputParams, onResult = { it: Either<Failure, List<Content?>> ->
             it.either(::handleFailure, ::handleContentsFound)
