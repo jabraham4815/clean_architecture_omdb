@@ -17,6 +17,10 @@ import java.io.InvalidObjectException
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    /*
+       MainActivity Sub component even has access to the parent component.
+       i.e the reason MainActivity can event inject the component itself.
+     */
     @Inject lateinit var appcomponet: AppComponent
     @Inject lateinit var gson: Gson
     @Inject lateinit var retrofit: Retrofit
@@ -62,6 +66,10 @@ class MainActivity : AppCompatActivity() {
 
         if (useCase == null) {
             throw InvalidObjectException("useCaseOMDB null exec")
+        }
+
+        if (gson == null){
+            throw InvalidObjectException("gson null exec")
         }
     }
 }

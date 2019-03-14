@@ -7,7 +7,6 @@ import dagger.android.AndroidInjectionModule
 import launcher.farrago.com.core.di.CoreComponent
 import launcher.farrago.com.farragov2.ContentsView
 import launcher.farrago.com.farragov2.MainApplication
-import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
 
 /*
  @Component: Component is a graph. We build a component. Component will built it's graph and provide injected instances by using modules.
@@ -44,7 +43,8 @@ interface AppComponent {
     }
 
     /*
-      Following are the classes requesting injection or asking access to the graph built by this component.
+      Following are the classes requesting injection.
+      i.e asking access to the graph of objects built by this component.
      */
     fun inject(app: MainApplication)
     fun inject(contentView: ContentsView)

@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.google.gson.Gson
 import launcher.farrago.com.farragov2.databinding.ContentsModuleViewBinding
+import launcher.farrago.com.farragov2.di.AppComponent
 import launcher.farrago.com.farragov2.viewmodels.ContentViewModel
 import javax.inject.Inject
 
@@ -56,7 +57,7 @@ class ContentsView : ConstraintLayout {
 
         //setup for injection
         val appComponent = (context.applicationContext as MainApplication).provideAppComponent()
-        appComponent.inject(this)
+        appComponent?.inject(this)
 
         setUpRecycler()
     }

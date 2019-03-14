@@ -16,14 +16,14 @@ class DataModule {
     @Provides
     @Singleton
     fun provideOMDBDataStore(): OMDBContentDataStore {
-        Log.d("DaggerOMDB", "Enter provideOMDBDataStore")
+        Log.d("OMDB", "Providing provideOMDBDataStore")
         return OMDBContentDataStore()
     }
 
     @Provides
     @Singleton
     fun provideCacheOMDBDataStore(): CachedContentDataStore {
-        Log.d("DaggerOMDB", "providing CacheOMDBDataStore")
+        Log.d("OMDB", "providing CacheOMDBDataStore")
         return CachedContentDataStore()
     }
 
@@ -31,7 +31,7 @@ class DataModule {
     @Singleton
     @Inject
     fun provideOMDBDataRepository(dataStore: OMDBContentDataStore): OMDBContentRepository {
-        Log.d("DaggerOMDB", "providing OMDBDataRepository")
+        Log.d("OMDB", "providing OMDBDataRepository")
         return OMDBContentRepository(dataStore)
     }
 
@@ -39,7 +39,7 @@ class DataModule {
     @Singleton
     @Inject
     fun provideOMDBSearchUseCase(repository: OMDBContentRepository): GetContentsUseCase<Map<String, String>> {
-        Log.d("DaggerOMDB", "providing OMDBSearchUseCase")
+        Log.d("OMDB", "providing OMDBSearchUseCase")
         return GetContentsUseCase<Map<String, String>>(repository)
     }
 }
